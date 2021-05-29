@@ -1,27 +1,34 @@
-import React, { Component } from 'react';
-import './App.css';
-import axios from 'axios'
+import React from 'react';
+import { Route } from 'react-router-dom';
+import { APP_STATES } from './routes';
+// import { Sidebar } from './modules/sidebar/Sidebar';
+import './app.scss';
 
-class App extends Component {
-  state = {
-    response: {}
-  };
-  
-  componentDidMount() {
-    axios.get('/api/v1/say-something').then((res) => {
-      const response = res.data;
-      this.setState({response});
-    });
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
   }
 
   render() {
     return (
-      <div className="App">
-        <h1>Hello from the frontend!</h1>
-        <h1>{this.state.response.body}</h1>
-      </div>
-    );
+      <React.Fragment>
+        <div className="app__menu-toggle"></div>
+        {/* <Sidebar /> */}
+        <div className="app">
+          <div className="layout-container">
+            {Object.values(APP_STATES).map((route, i) =>
+              <Route 
+                key={i}
+                path={route.path} 
+                exact={route.exact}
+                render={props =>
+                  <route.component {...props}/>
+                }
+              />
+            )}
+          </div>
+        </div>
+      </React.Fragment>
+    )
   }
 }
-
-export default App;

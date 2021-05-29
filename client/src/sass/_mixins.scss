@@ -1,0 +1,22 @@
+$mobileMaxWidth: 760px;
+
+@mixin mobile {
+  @media (max-width: $mobileMaxWidth) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $mobileMaxWidth) {
+    @content;
+  }
+}
+
+@mixin image($url) {
+  background-image: url(~assets/#{$url});
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  height: 2rem;
+  width: 2rem;
+}
