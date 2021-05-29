@@ -1,0 +1,62 @@
+@import 'sass/_colors.scss';
+@import 'sass/_mixins.scss';
+
+.layout-container {
+  @include mobile {
+    top: 4rem;
+  }
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  background: $lightGrey;
+}
+
+.page {
+  background: $lightGrey;
+  &__header {
+    @include mobile {
+      left: 0;
+      padding-left: 6rem;
+    }
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 25rem;
+    background: white;
+    padding: 2rem;
+    font-size: 20px;
+    font-weight: bold;
+    border-bottom: solid 1px $grey;
+
+    &-col {
+      position: relative;
+      display: inline-block;
+      margin-right: 4rem;
+
+      &:not(:last-child) {
+        &:after {
+          content: '';
+          position:absolute;
+          height:100%;
+          border-color: transparent transparent transparent $red;
+          border-style: solid;
+          border-width: 2px;
+          transform: skewX(-15deg);
+          height: 100%;
+          right: -2rem;
+        }
+      }
+    }
+  }
+
+  &__content {
+    @include mobile {
+      margin-top: 5rem;
+    }
+    background: white;
+    margin: 9rem 2rem 2rem;
+    box-shadow: 0px 0px 3px 0px darken($grey, 10);
+  }
+}
