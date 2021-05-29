@@ -3,6 +3,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
+require('dotenv').config();
+
+const InitiateMongoServer = require("./config/db");
+
+// Initiate Mongo Server
+InitiateMongoServer();
 
 // Create a new express application named 'app'
 const app = express();

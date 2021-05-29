@@ -1,7 +1,14 @@
-const saySomething = (req, res, next) => {
-  res.status(200).json({
-      body: 'Hello from the server!'
-  });
-};
+const {
+  signUp,
+  logIn,
+} = require('./authentication');
 
-module.exports.saySomething = saySomething;
+const {
+  getUser,
+} = require('./user');
+
+module.exports = {
+  signUp,
+  logIn,
+  getUser,
+};
