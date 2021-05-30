@@ -1,16 +1,11 @@
 const axios = require('axios');
 
-const {
-  url,
-  key,
-} = require('../config');
-
 const callApi = (config) => {
   config.method = config.method || 'GET';
   config.headers = {
-    "Ocp-Apim-Subscription-Key": key,
+    "Ocp-Apim-Subscription-Key": process.env.KEY,
   };
-  config.url = url + config.url;
+  config.url = process.env.URL + config.url;
 
   return axios(config).then((result = {}) => result.data);
 }
