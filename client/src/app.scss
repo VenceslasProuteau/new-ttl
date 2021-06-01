@@ -1,3 +1,4 @@
+@import 'sass/_commons.scss';
 @import 'sass/_colors.scss';
 @import 'sass/_mixins.scss';
 
@@ -34,4 +35,8 @@ body {
   right: 0;
   left: 25rem;
   background: #f5f5f5;
+}
+
+input {
+  font-family: inherit;
 }

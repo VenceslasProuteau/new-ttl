@@ -1,11 +1,26 @@
 import React from 'react';
 import { AuthService } from './authentication.service';
 import { APP_STATES } from '../../routes';
+import '../../app.scss';
 
-export const authentication = Component => (props) => {
+export const withAuth = Component => (props) => {
   if (!AuthService.isAuthenticated()) {
-    return props.history.replace(APP_STATES.LOGIN.path);
+    props.history.replace({
+      pathname: APP_STATES.LOGIN.path,
+      search: `?redirectUrl=${props.location.pathname}`,
+    });
+    return null;
   }
 
-  return <Component {...props} />
+  return (
+    <React.Fragment>
+      <div className="app__menu-toggle"></div>
+      {/* <Sidebar /> */}
+      <div className="app">
+        <div className="layout-container">
+          <Component {...props} />
+        </div>
+      </div>
+    </React.Fragment>
+  )
 }

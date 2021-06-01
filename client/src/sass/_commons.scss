@@ -1,5 +1,6 @@
-@import 'sass/_colors.scss';
-@import 'sass/_mixins.scss';
+@import './colors.scss';
+@import './mixins.scss';
+@import './forms.scss';
 
 .layout-container {
   @include mobile {
