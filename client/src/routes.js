@@ -1,3 +1,4 @@
+import { withAuth } from './commons/authentication/authentication.component';
 import { Dashboard } from './modules/dashboard/dashboard.page';
 // import { Team } from './modules/team/Team';
 // import { Decks } from './modules/decks/Decks';
@@ -6,16 +7,16 @@ import { Dashboard } from './modules/dashboard/dashboard.page';
 import { LoginPage } from './modules/login/login.page';
 import { SignUpPage } from './modules/signup/signup.page';
 
-const EntryRedirection = ({ history }) => {
-  history.replace(APP_STATES.LOGIN.path);
-  return null;
-};
+const EntryRedirect = (props) => {
+  props.history.replace(APP_STATES.DASHBOARD.path);
+  return null;  
+}
 
 const APP_STATES = {
   HOME: {
     path: '/',
     exact: true,
-    component: EntryRedirection
+    component: withAuth(EntryRedirect),
   },
   LOGIN: {
     path: '/login',
@@ -27,7 +28,7 @@ const APP_STATES = {
   },
   DASHBOARD: {
     path: '/dashboard',
-    component: Dashboard,
+    component: withAuth(Dashboard),
   },
   // DECKS: {
   //   path: '/decks',

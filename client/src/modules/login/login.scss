@@ -1,0 +1,50 @@
+@import '../../sass/commons.scss';
+
+.login {
+  display: flex;
+  height: 100%;
+  // background-image: url('../../assets/background.png');
+  // /* Center and scale the image nicely */
+  // background-position: center;
+  // background-repeat: no-repeat;
+  // background-size: cover;
+
+  form {
+    background: $black;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 6rem 6rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    input {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:not(:first-child){
+        margin-top: 2rem;
+      }
+    }
+
+    button {
+      margin-top: 2rem;
+    }
+  }
+
+  &__actions {
+    margin: 4rem 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__switch {
+    cursor: pointer;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    text-decoration: underline;
+  }
+}

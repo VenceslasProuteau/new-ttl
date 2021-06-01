@@ -13,10 +13,8 @@ $mobileMaxWidth: 760px;
 }
 
 @mixin image($url) {
-  background-image: url(~assets/#{$url});
+  background-image: url(#{$url});
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-  height: 2rem;
-  width: 2rem;
 }
