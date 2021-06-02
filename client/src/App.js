@@ -1,9 +1,6 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { APP_STATES } from './routes';
-// import { Sidebar } from './modules/sidebar/Sidebar';
-import { LoginPage } from './modules/login/login.page';
-import { AuthService } from './commons/authentication/authentication.service';
 
 export default class App extends React.Component {
   constructor(props) {
