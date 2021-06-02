@@ -1,6 +1,6 @@
 import React from 'react';
 import { AuthService } from './authentication.service';
-import { APP_STATES } from '../../routes';
+import { APP_STATES } from 'app/routes';
 import '../../app.scss';
 
 export const withAuth = Component => (props) => {

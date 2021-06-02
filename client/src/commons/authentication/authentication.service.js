@@ -45,7 +45,7 @@ function AuthServiceMethod(AuthApi) {
     },
     signUp(data) {
       return AuthApi.signUp(data)
-        .then(() => this.login(data));
+        .catch(({ response: { data } } = {}) => Promise.reject(data))
     },
     isAuthenticated() {
       return !!Cookies.get(AUTH_TOKEN)
