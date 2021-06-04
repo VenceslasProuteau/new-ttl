@@ -1,7 +1,7 @@
 @import '../../sass/mixins';
 
 .spinner {
-  @include image('../assets/loader.svg');
+  @include image('~assets/loader.svg');
   transform: translate(-50%, -50%);
   height: 7rem;
   width: 7rem;
