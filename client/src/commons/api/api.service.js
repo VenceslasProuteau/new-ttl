@@ -10,11 +10,14 @@ function ApiServiceMethod(AuthTokenService) {
         .then((result = {}) => result);
     },
     callAuth(config) {
-      return AuthTokenService.getAuthToken()
-        .then((token) => this.call({
-          ...config,
-          headers: { ...config.headers, token }
-        }));
+      const token = AuthTokenService.getAuthToken();
+      if (!token) {
+        return Promise.reject({ reason: 'NOT_AUTHENTICATED'});
+      }
+      return this.call({
+        ...config,
+        headers: { ...config.headers, token }
+      });
     }
   }
 };

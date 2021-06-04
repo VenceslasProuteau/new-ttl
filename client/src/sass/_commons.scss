@@ -15,16 +15,23 @@
 }
 
 .page {
+  @include mobile {
+    left: 0;
+  }
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 25rem;
   background: $lightGrey;
+
   &__header {
     @include mobile {
+      padding-left: 7rem;
       left: 0;
-      padding-left: 6rem;
     }
     position: fixed;
-    top: 0;
-    right: 0;
     left: 25rem;
+    right: 0;
     background: white;
     padding: 2rem;
     font-size: 20px;
@@ -53,9 +60,6 @@
   }
 
   &__content {
-    @include mobile {
-      margin-top: 5rem;
-    }
     background: white;
     margin: 9rem 2rem 2rem;
     box-shadow: 0px 0px 3px 0px darken($grey, 10);
@@ -69,4 +73,8 @@
       color: $red;
     }
   }
+}
+
+input {
+  font-family: inherit;
 }

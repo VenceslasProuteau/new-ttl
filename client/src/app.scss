@@ -25,18 +25,14 @@ body {
   }
 }
 
-.app {
+.app-layout {
   @include mobile {
     left: 0;
   }
   position: absolute;
   top: 0;
+  left: 0;
   bottom: 0;
   right: 0;
-  left: 25rem;
   background: #f5f5f5;
-}
-
-input {
-  font-family: inherit;
 }
