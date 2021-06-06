@@ -16,6 +16,7 @@ router.post('/user/login', loginValidators, controllers.logIn);
 router.get('/user/me', auth, controllers.getUser);
 
 router.post('/team/create', auth, controllers.createTeam);
+router.get('/team/:id', auth, controllers.get);
 
 router.get('/schedule/:date', getSchedule);
 router.get('/players/:teamId', getPlayers);

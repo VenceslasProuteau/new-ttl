@@ -9,6 +9,7 @@ const {
 
 const {
   createTeam,
+  get,
 } = require('./team');
 
 module.exports = {
@@ -16,4 +17,5 @@ module.exports = {
   logIn,
   getUser,
   createTeam,
+  get,
 };

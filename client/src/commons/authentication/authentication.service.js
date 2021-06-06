@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie';
+import { UserService } from '../user/user.service';
 import { AuthApi as AuthApiModule } from './authentication.api';
 
 const AUTH_TOKEN = 'authToken';
@@ -30,11 +31,12 @@ function AuthServiceMethod(AuthApi) {
       window.location.hostname.split('.').slice(-2).join('.');
     },
     logout() {
-      const domain = this.getDomain();
-      Cookies.remove(AUTH_TOKEN, { domain });
+      UserService.resetStore();
+      Cookies.remove(AUTH_TOKEN, { domain: this.getDomain() });
       store.reset();
     },
     login(data) {
+      UserService.resetStore();
       return AuthApi.login(data)
         .then(({ data: { token } } = {}) => {
           Cookies.set(AUTH_TOKEN, token, {

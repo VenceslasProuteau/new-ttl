@@ -21,13 +21,11 @@ export const withAuth = Component => class Authentication extends React.Componen
       });
       return null;
     }
-    this.setState({ isLoading: true });
-    return UserService.getSelfUser()
-      .then((user) => this.setState({ isLoading: false, user }));
+    this.setState({ isLoading: false });
   }
 
   render() {
-    return this.state.isLoading ? <Spinner /> : <Component {...this.props} user={this.state.user} />
+    return this.state.isLoading ? <Spinner /> : <Component {...this.props} />
     // <React.Fragment>
     //   <div className="app__menu-toggle"></div>
     //   <Sidebar />

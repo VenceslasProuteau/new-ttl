@@ -11,6 +11,7 @@ import {
   EMAIL_PATTERN
 } from 'commons/forms/validators';
 import { AuthService } from 'commons/authentication/authentication.service';
+import { UserService } from 'commons/user/user.service';
 import { APP_STATES } from 'app/routes';
 import './login.scss';
 
@@ -33,10 +34,13 @@ export class LoginPage extends Component {
     this.setState({ isLoading: true });
     return AuthService.login(data)
       .then(() => {
-        if (!this.redirectUrl) {
-          return this.props.history.replace(APP_STATES.DASHBOARD.path);
-        }
-        window.location.href = `${window.location.origin}${this.redirectUrl}`;
+        return UserService.getSelfUser()
+          .then(() => {
+            if (!this.redirectUrl) {
+              return this.props.history.replace(APP_STATES.HOME.path);
+            }
+            window.location.href = `${window.location.origin}${this.redirectUrl}`;
+          });
       }).catch(({ error }) => this.setState({ error, isLoading: false }));
   }
 
@@ -44,12 +48,12 @@ export class LoginPage extends Component {
     return this.state.isLoading ? <Spinner /> : (
       <div className="authent-page">
         <div className="authent-page__form-container">
-          <Form 
+          <Form
             onSubmit={this.onLogin}
             render={({
               handleSubmit,
             }) => (
-              <form onSubmit={handleSubmit} autoComplete="off">
+              <form onSubmit={handleSubmit} autoComplete="off" className="form">
                 <Field name="email" validate={composeValidators(required, pattern(EMAIL_PATTERN))}>
                   {({ input }) => (
                     <input

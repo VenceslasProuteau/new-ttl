@@ -9,7 +9,6 @@ import { DECK_STATES } from './route-paths';
 export class Decks extends React.Component {
   constructor(props) {
     super(props);
-    console.log('props', props);
     this.state = {
       isLoading: true,
       currentDate: format(Date.now(), 'yyyy-MM-dd'),
@@ -19,7 +18,6 @@ export class Decks extends React.Component {
   componentDidMount() {
     return ScheduleService.getSchedule(this.state.currentDate)
       .then((games) => {
-        console.log('games', games);
         this.setState({
           isLoading: false,
           games,

@@ -46,7 +46,7 @@ export class SignUpPage extends Component {
     this.setState({ isLoading: true });
     return AuthService.login(this.state.form)
       .then(() => {
-        this.props.history.replace(APP_STATES.DASHBOARD.path);
+        this.props.history.replace(APP_STATES.HOME.path);
       });
   }
 
@@ -59,7 +59,7 @@ export class SignUpPage extends Component {
             render={({
               handleSubmit,
             }) => !this.state.isAccountCreated ? (
-                <form onSubmit={handleSubmit} autoComplete="off">
+                <form onSubmit={handleSubmit} autoComplete="off" className="form">
                   <Field name="email" validate={composeValidators(required, pattern(EMAIL_PATTERN))}>
                     {({ input }) => (
                       <input
