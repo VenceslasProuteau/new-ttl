@@ -7,11 +7,13 @@ function UserServiceMethod(UserApi) {
     getSelfUser() {
       const user = store.get().user;
       return user ? Promise.resolve(user) : UserApi.getSelfUser()
-        .then((user) => {
-          console.log('user', user);
-          store.set({ user });
-          return user;
+        .then(({ data } = {}) => {
+          store.set({ user: data }, true);
+          return data;
         });
+    },
+    resetStore() {
+      return store.reset();
     }
   }
 };

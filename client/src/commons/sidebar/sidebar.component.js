@@ -2,19 +2,21 @@ import React from 'react';
 import {withRouter, NavLink} from 'react-router-dom';
 import classNames from 'classnames';
 
+import { AuthService } from 'commons/authentication/authentication.service';
 import { UserService } from 'commons/user/user.service';
-import {APP_STATES} from 'app/routes';
-import { DECK_STATES } from 'modules/decks/route-paths';
+import { Spinner } from 'commons/spinner/spinner.component';
+import { APP_STATES } from 'app/routes';
 import './sidebar.scss';
 
 class SidebarComponent extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       isLoading: true,
       isMenuToggled: false,
     }
     this.toggleMenu = this.toggleMenu.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   componentDidMount() {
@@ -32,10 +34,15 @@ class SidebarComponent extends React.Component {
       isMenuToggled: !this.state.isMenuToggled,
     });
   }
+
+  logout() {
+    AuthService.logout();
+    return this.props.history.replace(APP_STATES.LOGIN.path);
+  }
   
   render() {
     return this.state.isLoading
-    ? <div>isLoading ...</div>
+    ? <Spinner />
     : (
       <React.Fragment>
         <div className="sidebar__toggle-menu" onClick={this.toggleMenu}></div>
@@ -43,7 +50,7 @@ class SidebarComponent extends React.Component {
           <div className="sidebar__user-card">
             <div className="sidebar__close-menu" onClick={this.toggleMenu}></div>
             <div className="sidebar__user-name">
-              {this.state.user.pseudo}
+              {this.state.user.username}
             </div>
             <div className="sidebar__user-informations">
               <div className="sidebar__user-informations-row">
@@ -54,7 +61,8 @@ class SidebarComponent extends React.Component {
           </div>
           <nav>
             <NavLink
-              to={APP_STATES.DASHBOARD.path}
+              exact
+              to={APP_STATES.HOME.path}
               className="sidebar__item" 
               activeClassName="sidebar__item--selected"
               onClick={this.toggleMenu}
@@ -64,7 +72,7 @@ class SidebarComponent extends React.Component {
             </NavLink>
 
             <NavLink
-              to={DECK_STATES.HOME}
+              to={APP_STATES.DECKS.path}
               className="sidebar__item" 
               activeClassName="sidebar__item--selected"
               onClick={this.toggleMenu}
@@ -73,7 +81,7 @@ class SidebarComponent extends React.Component {
               <span className="sidebar__item-label">Mes decks</span>
             </NavLink>
 
-            {this.state.user.teamId && (<NavLink
+            <NavLink
               to={APP_STATES.TEAM.path}
               className="sidebar__item" 
               activeClassName="sidebar__item--selected"
@@ -81,8 +89,13 @@ class SidebarComponent extends React.Component {
             >
               <div className="sidebar__item-icon sidebar__item-icon--team"></div>
               <span className="sidebar__item-label">Mon équipe</span>
-            </NavLink>)}
+            </NavLink>)
           </nav>
+          <div className="sidebar__logout">
+            <button onClick={this.logout}>
+              Se déconnecter
+            </button>
+          </div>
         </div>
       </React.Fragment>
     )
